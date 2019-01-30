@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+require('dotenv').load();
 
 app.use(express.static('dist', {index: 'demo.html', maxage: '4h'}));
 app.use(bodyParser.json());
@@ -78,6 +79,7 @@ function sendTelegramMessage(chatId, text, parseMode) {
 
 app.post('/usage-start', cors(), function(req, res) {
     console.log('usage from', req.query.host);
+    console.log('token', process.env.TELEGRAM_TOKEN);
     res.statusCode = 200;
     res.end();
 });
