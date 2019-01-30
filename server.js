@@ -70,7 +70,7 @@ io.on('connection', function(client){
 function sendTelegramMessage(chatId, text, parseMode) {
     request
         .post({ 
-            url: 'https://api.telegram.org/bot' + process.env.TELEGRAM_TOKEN + '/sendMessage',
+            url: 'https://api.telegram.org/bot765094274:AAHlbgERGd7DLaSmDyYm6fdpuM7aBsgnYMU/sendMessage',
             form: {
                 "chat_id": chatId,
                 "text": text,
