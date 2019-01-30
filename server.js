@@ -69,17 +69,23 @@ io.on('connection', function(client){
 
 function sendTelegramMessage(chatId, text, parseMode) {
     request
-        .post('https://api.telegram.org/bot' + process.env.TELEGRAM_TOKEN + '/sendMessage')
-        .form({
-            "chat_id": chatId,
-            "text": text,
-            "parse_mode": parseMode
+        .post({ 
+            url: 'https://api.telegram.org/bot' + process.env.TELEGRAM_TOKEN + '/sendMessage',
+            form: {
+                "chat_id": chatId,
+                "text": text,
+                "parse_mode": parseMode
+            }
+        }, function(err,httpResponse,body) {
+            if (err) {
+                return console.error('upload failed:', err);
+            }
+            console.log('Successful!  Server responded with:', body);
         });
 }
 
 app.post('/usage-start', cors(), function(req, res) {
     console.log('usage from', req.query.host);
-    console.log('token', process.env.TELEGRAM_TOKEN);
     res.statusCode = 200;
     res.end();
 });
